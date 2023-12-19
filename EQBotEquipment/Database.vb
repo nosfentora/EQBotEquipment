@@ -42,7 +42,7 @@ Public Class Database
 
     Public Function LoadAccountData() As List(Of AccountData)
         Dim accountDataList As New List(Of AccountData)
-        Dim selectQuery As String = "SELECT id, name FROM account"
+        Dim selectQuery As String = "SELECT id, name FROM account ORDER BY name ASC"
 
         Using cmd As New MySqlCommand(selectQuery, Connection)
             Using reader As MySqlDataReader = cmd.ExecuteReader()
@@ -58,7 +58,7 @@ Public Class Database
     Public Function LoadCharacterData(account_id As Integer) As List(Of CharacterData)
         Dim characterDataList As New List(Of CharacterData)
 
-        Dim selectQuery As String = $"SELECT id, account_id, name FROM character_data WHERE account_id = {account_id}"
+        Dim selectQuery As String = $"SELECT id, account_id, name FROM character_data WHERE account_id = {account_id} ORDER BY name ASC"
 
         Using cmd As New MySqlCommand(selectQuery, Connection)
             Using reader As MySqlDataReader = cmd.ExecuteReader()
@@ -81,7 +81,7 @@ Public Class Database
     Public Function LoadBotData(selectedCharacterId As Integer) As List(Of BotData)
         Dim botDataList As New List(Of BotData)
 
-        Dim query As String = $"SELECT bot_id, name, race, class FROM bot_data WHERE owner_id = {selectedCharacterId}"
+        Dim query As String = $"SELECT bot_id, name, race, class FROM bot_data WHERE owner_id = {selectedCharacterId} ORDER BY name ASC"
 
         Using command As New MySqlCommand(query, Connection)
             Using reader As MySqlDataReader = command.ExecuteReader()
@@ -150,7 +150,6 @@ Public Class Database
     End Function
 
     Protected Overrides Sub Finalize()
-        ' Close the connection when done
         If Connection.State = ConnectionState.Open Then
             Connection.Close()
         End If
