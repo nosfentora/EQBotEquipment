@@ -7,7 +7,6 @@
         Database = _database
     End Sub
 
-
     Public Function PromptForAccount() As AccountData
         Pagination = New Pagination(Database.LoadAccountData.Cast(Of Object)().ToList())
 

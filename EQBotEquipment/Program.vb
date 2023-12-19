@@ -5,17 +5,14 @@ Module Module1
 
     Private xmlData As XMLData
     Private database As Database
-    Private Utility As Utility
 
     Sub Main()
-        Utility = New Utility
-
         Console.Clear()
 
-        xmlData = New XMLData(Utility)
+        xmlData = New XMLData()
         xmlData.ImportExistingProfiles()
 
-        database = New Database(xmlData, Utility)
+        database = New Database(xmlData)
 
         Do
             Dim selectedAccount As AccountData = (New Accounts(database)).PromptForAccount()

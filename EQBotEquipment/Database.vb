@@ -12,10 +12,8 @@ Public Class Database
 
     Private ReadOnly Connection As MySqlConnection
     Private ReadOnly XmlData As XMLData
-    Private ReadOnly Utility As Utility
 
-    Public Sub New(_xmlData As XMLData, _utility As Utility)
-        Utility = _utility
+    Public Sub New(_xmlData As XMLData)
         XmlData = _xmlData
 
         Dim databaseElement As XmlElement = XmlData.GetElement("Database")

@@ -48,6 +48,7 @@
             End If
         Loop
     End Function
+
     Private Sub WriteMenu()
         Utility.WriteWrappedLine($"Characters found for {Account.Name}:")
         For Each character In Pagination.PageItems

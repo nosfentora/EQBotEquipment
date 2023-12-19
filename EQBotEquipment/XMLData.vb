@@ -8,15 +8,12 @@ Public Class XMLData
     Private ReadOnly Property XmlFilePath As String
     Private ReadOnly Property ExePath As String
 
-    Private ReadOnly Property Utility As Utility
-
-    Public Sub New(_utility As Utility)
+    Public Sub New()
         ExePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)
         XmlFilePath = System.IO.Path.Combine(ExePath, FILENAME)
 
         XmlData = New XmlDocument()
         XmlData.Load(XmlFilePath)
-        Utility = _utility
     End Sub
 
     Public Function GetElement(elementName As String) As XmlElement

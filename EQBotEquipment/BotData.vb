@@ -2,7 +2,7 @@
     Private ReadOnly XmlData As XMLData
 
     Public Sub New(_xmlData As XMLData)
-        Me.XmlData = _xmlData
+        XmlData = _xmlData
     End Sub
 
     Public Property BotId As Integer
