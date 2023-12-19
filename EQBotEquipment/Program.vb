@@ -47,27 +47,25 @@ Module Module1
     End Sub
 
     Private Function PromptForAccount() As AccountData
-        Dim accountListData As List(Of AccountData) = database.LoadAccountData()
+        Dim accountsData As New Accounts With {
+            .AccountData = database.LoadAccountData
+        }
 
-        If accountListData.Count = 0 Then
+        If accountsData.NumberOfAccounts = 0 Then
             Console.WriteLine("No accounts found, goodbye!")
             Environment.Exit(0)
         End If
 
         Dim selectedAcccountId As Integer
 
-        Utility.WriteWrappedLine("Accounts found:")
-        For Each account In accountListData
-            Console.WriteLine($"({account.AccountId}) - {account.Name})")
-        Next
-        Console.WriteLine($"{vbCrLf}(X) - Exit")
+        WriteAccountMenu(accountsData)
 
         Do
             Console.Write("Enter the ID of the account you want to work with: ")
             Dim input As String = Console.ReadLine()
 
             If Integer.TryParse(input, selectedAcccountId) Then
-                Dim selectedAccount = accountListData.FirstOrDefault(Function(account) account.AccountId = selectedAcccountId)
+                Dim selectedAccount = accountsData.AccountData.FirstOrDefault(Function(account) account.AccountId = selectedAcccountId)
                 If selectedAccount IsNot Nothing Then
                     Return selectedAccount
                 Else
@@ -75,11 +73,34 @@ Module Module1
                 End If
             ElseIf input.Equals("X", StringComparison.CurrentCultureIgnoreCase) Then
                 Environment.Exit(0)
+            ElseIf input.Equals("N", StringComparison.CurrentCultureIgnoreCase) And accountsData.HasMore Then
+                accountsData.MoveToNextPage()
+                Console.Clear()
+                WriteAccountMenu(accountsData)
+            ElseIf input.Equals("P", StringComparison.CurrentCultureIgnoreCase) And accountsData.HasFewer Then
+                accountsData.MoveToPreviousPage()
+                Console.Clear()
+                WriteAccountMenu(accountsData)
             Else
                 Console.WriteLine("Invalid input, please enter a number and try again.")
             End If
         Loop
     End Function
+
+    Private Sub WriteAccountMenu(accountsData As Accounts)
+        Utility.WriteWrappedLine("Accounts found:")
+        For Each account In accountsData.PageItems
+            Console.WriteLine($"({account.AccountId}) - {account.Name})")
+        Next
+        If accountsData.HasMore Then
+            Console.WriteLine($"{vbCrLf}(N) - Next")
+        End If
+        If accountsData.HasFewer Then
+            Console.WriteLine($"{vbCrLf}(P) - Previous")
+        End If
+        Console.WriteLine($"{vbCrLf}(X) - Exit")
+    End Sub
+
     Private Function PromptForCharacter(account As AccountData) As CharacterData
         Console.Clear()
         Dim characterListData As List(Of CharacterData) = database.LoadCharacterData(account.AccountId)
