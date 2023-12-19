@@ -1,0 +1,222 @@
+<data>
+	<Database host="127.0.0.1" db_name="peq" user="root" password="eqemu" />
+	<Bots>
+		<PreDefined>
+			<Profile Class="0" Name="Warrior_Uber">
+				<Items IDS="35001,27820,31084,43414,27820,70115,23907,11428,70145,23905,11136,68417,12594,71134,70211,29046,29046,44305,16691,19439,70240,0,0" />
+			</Profile>
+			<Profile Class="0" Name="Warrior_High_Level">
+				<Items IDS="35001,70154,0,70086,70232,68392,70430,31458,39665,0,23644,29598,70039,45131,22997,70223,29046,15119,70474,25197,70129,0,0" />
+			</Profile>
+			<Profile Class="0" Name="Warrior_Low_Level">
+				<Items IDS="59943,71518,71302,51255,6470,7136,6170,6415,15802,12189,7942,69229,2746,5500,10772,14758,40164,2735,61225,70195,30072,0,0" />
+			</Profile>
+			<Profile Class="0" Name="Warrior_mid_level">
+				<Items IDS="59943,61204,6417,51255,65523,25608,19726,27112,25551,29092,2747,27640,2746,25579,5801,62108,30339,51273,28505,27109,62305,0,0" />
+			</Profile>
+			<Profile Class="1" Name="CLERIC_HI_END1">
+				<Items IDS="0,70120,31417,37690,98043,30302,24536,2554,21998,51243,28767,105728,2521,31700,29380,52051,46893,39773,5781,31199,23647,0,0" />
+			</Profile>
+			<Profile Class="1" Name="Cleric_LowLvl">
+				<Items IDS="59943,19826,29876,6083,0,30013,19726,29877,2340,29880,11978,69229,11980,32151,10755,0,19820,29879,29878,22657,11545,0,0" />
+			</Profile>
+			<Profile Class="1" Name="Cleric_Mid_Level">
+				<Items IDS="59943,62124,6955,65527,0,6760,6759,2950,43371,14686,4406,69229,31206,62187,0,0,0,44207,0,4407,11957,0,0" />
+			</Profile>
+			<Profile Class="1" Name="Cleric_Mid_level_2">
+				<Items IDS="70204,11538,24989,28726,58710,65611,40269,70215,22816,7938,10105,69229,26533,7446,31837,45912,45912,26557,71333,26532,30377,0,0" />
+			</Profile>
+			<Profile Class="1" Name="Cleric_Uber">
+				<Items IDS="70321,70327,68855,69157,69133,0,70617,70861,0,69126,70862,47298,69252,47307,20076,47294,70606,69150,69146,69177,0,0,0" />
+			</Profile>
+			<Profile Class="2" Name="Paladin_High_Level">
+				<Items IDS="35003,29047,68860,9483,28771,0,13670,70215,0,0,68864,0,70199,68835,27168,70155,0,68748,70270,70195,39691,0,0" />
+			</Profile>
+			<Profile Class="2" Name="Paladin_Low_Level">
+				<Items IDS="0,40100,65874,6083,70015,69298,30016,2174,2913,27133,4406,6774,6428,22881,8149,10366,69302,30114,65875,68239,1623,0,0" />
+			</Profile>
+			<Profile Class="2" Name="Paladin_Mid_Level">
+				<Items IDS="0,2092,3200,6167,30019,25295,4402,40048,6087,24739,3208,69229,3217,5158,0,14678,14678,0,61225,4920,70207,0,0" />
+			</Profile>
+			<Profile Class="2" Name="Paladin_Uber">
+				<Items IDS="35003,29047,29648,43406,70134,68320,13694,70215,71175,70122,30537,27699,70199,22990,71129,29046,70223,15751,44278,70195,70207,0,0" />
+			</Profile>
+			<Profile Class="4" Name="SK_Mid_Level">
+				<Items IDS="59943,6507,70021,1625,5744,30351,3396,68251,15790,2747,2747,27640,25290,46167,0,70155,70030,10803,40201,0,1623,0,0" />
+			</Profile>
+			<Profile Class="4" Name="SK_Uber">
+				<Items IDS="35005,62297,44301,26582,68591,70431,13670,44302,28887,44303,44303,29596,44290,70225,27168,61210,70223,44305,44306,44307,43187,0,0" />
+			</Profile>
+			<Profile Class="5" Name="Druid_LowLvl">
+				<Items IDS="59943,11538,25291,28726,3828,32326,2286,6173,2287,10105,4406,69229,25026,59952,26002,10150,10347,4572,4576,4407,25613,0,0" />
+			</Profile>
+			<Profile Class="5" Name="Druid_Mid_Level">
+				<Items IDS="0,70224,70201,62307,70120,8776,40269,70197,71395,70043,70124,70121,70023,40007,43419,40172,45916,44285,62164,40140,15879,0,0" />
+			</Profile>
+			<Profile Class="5" Name="Druid_Uber1">
+				<Items IDS="35006,5594,68900,69132,39706,39700,0,68901,0,68904,32110,68848,13603,62880,68802,47293,26993,47651,16811,68903,47284,0,0" />
+			</Profile>
+			<Profile Class="5" Name="Druid_Uber2">
+				<Items IDS="70321,5594,9833,47302,0,0,28661,70889,21998,70890,32110,47296,70891,62880,47309,26989,68785,47651,28652,69179,47284,0,0" />
+			</Profile>
+			<Profile Class="6" Name="Monk_Mid_Level">
+				<Items IDS="59943,45917,24989,24740,45917,14703,25720,6173,25551,65632,65632,69229,2746,26846,26826,45916,45916,6085,6176,31778,25294,0,0" />
+			</Profile>
+			<Profile Class="6" Name="Monk_Uber">
+				<Items IDS="35007,70232,1116,70280,70268,70260,71105,70197,70264,68198,32110,26799,10652,26740,63771,70223,26992,70583,28652,70217,0,0,0" />
+			</Profile>
+			<Profile Class="7" Name="Bard_Mid_Level">
+				<Items IDS="0,10407,4557,6083,19826,21242,31207,4559,25293,12189,4560,51268,4561,0,10177,30343,30343,4154,4158,4563,2740,0,0" />
+			</Profile>
+			<Profile Class="8"  Name="Rogue_Mid_Level">
+				<Items IDS="0,10313,25003,62279,29725,8133,70055,44268,70098,24739,11978,2944,25334,7214,32149,14738,29063,71355,21444,31778,24753,0,0" />
+			</Profile>
+			<Profile Class="9" Name="Shaman_Mid_Level">
+				<Items IDS="59943,70120,24812,43324,70156,8353,4919,5718,24817,27111,40312,69229,25026,6433,25287,61224,40172,24815,24822,44233,70003,0,0" />
+			</Profile>
+			<Profile Class="9" Name="Shaman_Newb">
+				<Items IDS="59943,30110,3200,24813,30110,14753,3309,14749,25612,10148,10314,69229,12083,6689,10771,14694,14631,30114,3218,3219,6795,0,0" />
+			</Profile>
+			<Profile Class="9" Name="Shaman_Uber">
+				<Items IDS="35010,5777,25194,9444,28771,28655,28660,11518,43425,11096,28668,26546,13579,24699,27278,19719,25211,15773,16801,20078,28653,0,0" />
+			</Profile>
+			<Profile Class="10" Name="Necro_high_end">
+				<Items IDS="35011,68948,0,68953,25844,52093,68788,21994,68790,28668,69100,68768,70926,15867,0,70233,69070,0,0,47219,69134,0,0" />
+			</Profile>
+			<Profile Class="10" Name="Necro_Low_Level">
+				<Items IDS="59943,14751,10141,51267,28771,30515,4315,62309,25023,1618,30168,69229,6414,5316,51263,10346,25198,65176,31510,4407,2740,0,0" />
+			</Profile>
+			<Profile Class="10" Name="Necro_Mid_Level">
+				<Items IDS="70204,70136,70218,70101,70120,70132,61228,70202,5779,70125,70222,69229,70198,26526,70052,70094,70157,68233,70048,44286,70153,0,0" />
+			</Profile>
+			<Profile Class="10" Name="Necro_Mid_Level2">
+				<Items IDS="70204,51254,24756,43414,28771,14709,61228,55218,15802,7940,7942,70179,6414,26009,70028,28708,25298,0,0,70177,28743,0,0" />
+			</Profile>
+			<Profile Class="10" Name="Necro_Newb">
+				<Items IDS="59943,45917,0,8114,45917,19700,6785,1362,0,7942,7940,69229,6414,6692,9204,45916,2744,1253,0,4407,2407,0,0" />
+			</Profile>
+			<Profile Class="10" Name="Necro_Newb2">
+				<Items IDS="59943,58709,10141,5772,28771,3615,3396,62309,5779,65620,65620,69229,2336,32156,14742,10346,62299,1624,44287,1260,7587,0,0" />
+			</Profile>
+			<Profile Class="10" Name="Necro_Uber1">
+				<Items IDS="35011,43403,30469,9439,28771,27258,55216,11600,15802,62263,30470,20519,62032,21892,27284,29046,29046,29646,30466,20430,15883,0,0" />
+			</Profile>
+			<Profile Class="10" Name="Necro_Uber2">
+				<Items IDS="35011,61204,70218,70173,70224,8367,13649,11600,70433,70044,70222,70435,70198,26526,27284,21495,65530,44288,23638,20430,70153,0,0" />
+			</Profile>
+			<Profile Class="11" Name="Wizard_High_Level">
+				<Items IDS="35012,70136,70218,9439,28771,40215,68312,32301,70118,70222,70044,0,70198,14341,0,70094,21495,0,26207,70473,43409,0,0" />
+			</Profile>
+			<Profile Class="11" Name="Wizard_High_level2">
+				<Items IDS="35012,5777,70218,9442,70224,0,68788,21994,0,28668,70222,70179,26996,15867,43239,70269,70452,44326,70273,44328,70247,0,0" />
+			</Profile>
+			<Profile Class="11" Name="Wizard_mid_level">
+				<Items IDS="40243,7332,1225,1544,70355,43289,1005,1008,29671,10408,10408,0,28748,29121,0,21847,29210,29127,19026,10129,2954,0,0" />
+			</Profile>
+			<Profile Class="11" Name="Wizard_Mid_Level2">
+				<Items IDS="0,40094,1302,51267,62277,14691,43274,62309,31759,4780,10360,69229,7590,29207,9204,10150,29063,1360,1651,44286,43409,0,0" />
+			</Profile>
+			<Profile Class="11" Name="Wizard_Newb">
+				<Items IDS="59943,30019,0,70025,45917,14735,1114,71414,55222,55250,70125,20603,25026,52038,71426,10364,30339,1624,7591,2903,15926,0,0" />
+			</Profile>
+			<Profile Class="12" Name="Mage_High_level">
+				<Items IDS="0,29717,28043,5772,40095,71396,6785,11320,15790,10314,62263,69229,31509,24598,9204,30015,8298,8150,1651,25649,43409,0,0" />
+			</Profile>
+			<Profile Class="12" Name="Mage_High_level2">
+				<Items IDS="35013,70983,68915,26981,47289,47276,70617,68916,70704,68919,68919,68723,70940,19839,47311,0,68957,71099,70943,70941,70611,0,0" />
+			</Profile>
+			<Profile Class="12" Name="Mage_items">
+				<Items IDS="35011,68948,0,68953,25844,52093,68788,21994,68790,28668,69100,68768,70926,15867,0,70233,69070,0,0,47219,69134,0,0" />
+			</Profile>
+			<Profile Class="12" Name="Mage_Low_level">
+				<Items IDS="0,10320,70218,25077,10320,30351,70014,1648,6416,4408,70222,70121,6414,6692,10219,30015,2744,1608,2575,40139,65562,0,0" />
+			</Profile>
+			<Profile Class="12" Name="Mage_mid_level">
+				<Items IDS="0,29717,28043,5772,40095,71396,6785,11320,15790,10314,62263,69229,31509,24598,9204,30015,8298,8150,1651,25649,43409,0,0" />
+			</Profile>
+			<Profile Class="13" Name="Enchanter_High_End">
+				<Items IDS="35014,43201,26517,9441,70224,29040,0,0,70118,70222,70044,0,70198,0,70147,29046,21495,44288,0,0,71471,0,0" />
+			</Profile>
+			<Profile Class="13" Name="Enchanter_High_Level">
+				<Items IDS="70204,28771,70218,9441,25844,71169,13638,21994,15802,70222,11283,26799,71133,22959,27637,70157,29043,70493,30466,20424,15874,0,0" />
+			</Profile>
+			<Profile Class="13" Name="Enchanter_Low_level">
+				<Items IDS="70204,20658,70218,25282,10320,14691,70014,70202,70118,70222,30299,19809,1404,6336,1843,28237,6748,65154,1651,4407,28238,0,0" />
+			</Profile>
+			<Profile Class="13" Name="Enchanter_Uber">
+				<Items IDS="35014,4324,9835,14706,70224,30545,55216,25530,15802,55195,7943,9254,70198,24771,71162,21495,19719,25529,52074,70473,15872,0,0" />
+			</Profile>
+			<Profile Class="15" Name="Beastlord_Mid_Level">
+				<Items IDS="59943,70206,70041,59969,10580,6418,10742,70037,5580,10148,10721,69229,2746,63323,26804,10366,28708,6085,7097,25552,43417,0,0" />
+			</Profile>
+			<Profile Class="15" Name="Berserker_Mid_Level">
+				<Items IDS="0,10082,29050,24740,40104,69298,68246,30115,40065,7941,11978,69011,3310,69297,0,45916,45916,25331,40196,68247,1365,0,0" />
+			</Profile>
+		</PreDefined>
+		<Imported></Imported>
+	</Bots>
+	<Data>
+		<Slots>
+			<Slot Name="None" Value="-1"/>
+			<Slot Name="Charm" Value="0" />
+			<Slot Name="Left Ear" Value="1" />
+			<Slot Name="Head" Value="2" />
+			<Slot Name="Face" Value="3" />
+			<Slot Name="Right Ear" Value="4" />
+			<Slot Name="Neck" Value="5" />
+			<Slot Name="Shoulders" Value="6" />
+			<Slot Name="Arms" Value="7" />
+			<Slot Name="Back" Value="8" />
+			<Slot Name="Left Wrist" Value="9" />
+			<Slot Name="Right Wrist" Value="10" />
+			<Slot Name="Range" Value="11" />
+			<Slot Name="Hands" Value="12" />
+			<Slot Name="Primary" Value="13" />
+			<Slot Name="Secondary" Value="14" />
+			<Slot Name="Left Finger" Value="15" />
+			<Slot Name="Right Finger" Value="16" />
+			<Slot Name="Chest" Value="17" />
+			<Slot Name="Legs" Value="18" />
+			<Slot Name="Feet" Value="19" />
+			<Slot Name="Waist" Value="20" />
+			<Slot Name="Ammo" Value="21" />
+			<Slot Name="Power Source" Value="22" />
+		</Slots>
+		<Classes>
+			<Class Name="Warrior" Alt="War,Tank" Value="0" />
+			<Class Name="Cleric" Alt="Clr" Value="1" />
+			<Class Name="Paladin" Alt="Pal" Value="2" />
+			<Class Name="Ranger" Alt="Rng" Value="3" />
+			<Class Name="Shadow Knight" Alt="SK" Value="4" />
+			<Class Name="Druid" Alt="Dru" Value="5" />
+			<Class Name="Monk" Alt="Mnk" Value="6" />
+			<Class Name="Bard" Alt="Brd" Value="7" />
+			<Class Name="Rogue" Alt="Rog" Value="8" />
+			<Class Name="Shaman" Alt="Shm" Value="9" />
+			<Class Name="Necromancer" Alt="Nec,Necro" Value="10" />
+			<Class Name="Wizard" Alt="Wiz" Value="11" />
+			<Class Name="Magician" Alt="Mag,Mage" Value="12" />
+			<Class Name="Enchanter" Alt="Enc" Value="13" />
+			<Class Name="Beastlord" Alt="Bst" Value="14" />
+			<Class Name="Berserker" Alt="Ber" Value="15" />
+		</Classes>
+		<Races>
+			<Race Name="Human" Value="0" Special="0" />
+			<Race Name="Barbarian" Value="1" Special="1" />
+			<Race Name="Erudite" Value="2" Special="2" />
+			<Race Name="Wood Elf" Value="3" Special="3" />
+			<Race Name="High Elf" Value="4" Special="4" />
+			<Race Name="Dark Elf" Value="5" Special="5" />
+			<Race Name="Half Elf" Value="6" Special="6" />
+			<Race Name="Dwarf" Value="7" Special="7" />
+			<Race Name="Troll" Value="8" Special="8" />
+			<Race Name="Ogre" Value="9" Special="9" />
+			<Race Name="Halfling" Value="10" Special="10" />
+			<Race Name="Gnome" Value="11" Special="11" />
+			<Race Name="Iksar" Value="12" Special="127" />
+			<Race Name="Vah Shir" Value="13" Special="129" />
+			<Race Name="Froglok" Value="14" Special="329" />
+			<Race Name="Drakkin" Value="15" Special="521" />
+		</Races>
+	</Data>
+</data>
