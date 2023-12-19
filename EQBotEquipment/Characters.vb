@@ -19,7 +19,7 @@
 
         Dim selectedCharacterId As Integer
 
-        WriteCharacterMenu()
+        WriteMenu()
 
         Do
             Console.Write("Enter the ID of the character you want to work with: ")
@@ -38,17 +38,17 @@
             ElseIf input.Equals("N", StringComparison.CurrentCultureIgnoreCase) And Me.Pagination.HasMore Then
                 Me.Pagination.MoveToNextPage()
                 Console.Clear()
-                WriteCharacterMenu()
+                WriteMenu()
             ElseIf input.Equals("P", StringComparison.CurrentCultureIgnoreCase) And Me.Pagination.HasFewer Then
                 Me.Pagination.MoveToPreviousPage()
                 Console.Clear()
-                WriteCharacterMenu()
+                WriteMenu()
             Else
                 Console.WriteLine("Invalid input, pleaser enter a number and try again")
             End If
         Loop
     End Function
-    Private Sub WriteCharacterMenu()
+    Private Sub WriteMenu()
         Utility.WriteWrappedLine($"Characters found for {Account.Name}:")
         For Each character In Me.Pagination.PageItems
             Console.WriteLine($"({character.Id}) - {character.Name}")

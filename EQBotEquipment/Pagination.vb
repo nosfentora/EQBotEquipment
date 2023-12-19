@@ -12,6 +12,10 @@
         Return Me.MyData.Count
     End Function
 
+    Public Function PageItemsCount() As Integer
+        Return PageItems.Count
+    End Function
+
     Public ReadOnly Property CurrentPage As Integer
         Get
             Return _currentPage

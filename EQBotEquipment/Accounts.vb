@@ -18,7 +18,7 @@
 
         Dim selectedAcccountId As Integer
 
-        WriteAccountMenu()
+        WriteMenu()
 
         Do
             Console.Write("Enter the ID of the account you want to work with: ")
@@ -36,18 +36,18 @@
             ElseIf input.Equals("N", StringComparison.CurrentCultureIgnoreCase) And Me.Pagination.HasMore Then
                 Me.Pagination.MoveToNextPage()
                 Console.Clear()
-                WriteAccountMenu()
+                WriteMenu()
             ElseIf input.Equals("P", StringComparison.CurrentCultureIgnoreCase) And Me.Pagination.HasFewer Then
                 Me.Pagination.MoveToPreviousPage()
                 Console.Clear()
-                WriteAccountMenu()
+                WriteMenu()
             Else
                 Console.WriteLine("Invalid input, please enter a number and try again.")
             End If
         Loop
     End Function
 
-    Private Sub WriteAccountMenu()
+    Private Sub WriteMenu()
         Utility.WriteWrappedLine("Accounts found:")
         For Each account In Me.Pagination.PageItems
             Console.WriteLine($"({account.AccountId}) - {account.Name})")
