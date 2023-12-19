@@ -22,7 +22,7 @@ Module Module1
             Dim selectedCharacter As CharacterData = (New Characters(database, selectedAccount)).PromptForCharacter()
             If selectedCharacter IsNot Nothing Then
                 Do
-                    Dim selectedBot As BotData = PromptForBot(selectedCharacter)
+                    Dim selectedBot As BotData = (New Bots(database, selectedCharacter)).PromptForBot()
                     If selectedBot IsNot Nothing Then
                         Dim selectedProfile As BotProfile = PromptForProfile(selectedBot)
 
@@ -47,43 +47,7 @@ Module Module1
 
     End Sub
 
-    Public Function PromptForBot(selectedCharacter As CharacterData) As BotData
-        Console.Clear()
-        Dim botDataList As List(Of BotData) = database.LoadBotData(selectedCharacter.Id)
 
-        If botDataList.Count = 0 Then
-            Console.WriteLine($"No bots found for {selectedCharacter.Name}")
-            Return Nothing
-        End If
-
-        Dim selectedBotId As Integer
-
-        Utility.WriteWrappedLine($"Bots found for {selectedCharacter.Name}:")
-        For Each botData As BotData In botDataList
-            Console.WriteLine($"({botData.BotId}) - Name: {botData.BotName} [{botData.BotRaceName} {botData.BotClassName} ({botData.BotRace}|{botData.BotClass})]")
-        Next
-        Console.WriteLine($"{vbCrLf}(X) - Exit")
-
-        Do
-            Console.Write("Enter Bot ID: ")
-            Dim input As String = Console.ReadLine()
-
-            If Integer.TryParse(input, selectedBotId) Then
-                Dim selectedBot = botDataList.FirstOrDefault(Function(bot) bot.BotId = selectedBotId)
-
-                If selectedBot IsNot Nothing Then
-                    Return selectedBot
-                Else
-                    Console.WriteLine("Invalid Bot ID. Please enter a valid Bot ID.")
-                End If
-            ElseIf input.Equals("X", StringComparison.CurrentCultureIgnoreCase) Then
-                Environment.Exit(0)
-            Else
-                Console.WriteLine("Invalid Bot ID. Please try again..")
-            End If
-        Loop While True
-        Return Nothing
-    End Function
 
     Public Function PromptForProfile(selectedBot As BotData) As BotProfile
 
