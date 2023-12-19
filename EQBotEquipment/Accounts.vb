@@ -24,7 +24,7 @@
             Dim input As String = Console.ReadLine()
 
             If Integer.TryParse(input, selectedAcccountId) Then
-                Dim selectedAccount = Pagination.PageItems.FirstOrDefault(Function(account) account.AccountId = selectedAcccountId)
+                Dim selectedAccount = Pagination.AllItems.First(Function(account) account.AccountId = selectedAcccountId)
                 If selectedAccount IsNot Nothing Then
                     Return selectedAccount
                 Else
@@ -49,7 +49,7 @@
     Private Sub WriteMenu()
         Utility.WriteWrappedLine("Accounts found:")
         For Each account In Pagination.PageItems
-            Console.WriteLine($"({account.AccountId}) - {account.Name})")
+            Console.WriteLine($"({account.AccountId}) - {account.Name}")
         Next
         If Pagination.HasMore Then
             Console.WriteLine($"{vbCrLf}(N) - Next")

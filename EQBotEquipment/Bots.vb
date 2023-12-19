@@ -26,7 +26,7 @@
             Dim input As String = Console.ReadLine()
 
             If Integer.TryParse(input, selectedBotId) Then
-                Dim selectedBot = Pagination.PageItems.FirstOrDefault(Function(bot) bot.BotId = selectedBotId)
+                Dim selectedBot = Pagination.PageItems.First(Function(bot) bot.BotId = selectedBotId)
 
                 If selectedBot IsNot Nothing Then
                     Return selectedBot

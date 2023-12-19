@@ -26,7 +26,7 @@
             Dim input As String = Console.ReadLine()
 
             If Integer.TryParse(input, selectedCharacterId) Then
-                Dim selectedCharacter = Pagination.PageItems.FirstOrDefault(Function(character) character.Id = selectedCharacterId)
+                Dim selectedCharacter = Pagination.PageItems.First(Function(character) character.Id = selectedCharacterId)
                 If selectedCharacter IsNot Nothing Then
                     Return selectedCharacter
                 Else

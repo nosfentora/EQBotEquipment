@@ -22,10 +22,15 @@
         End Get
     End Property
 
+    Public ReadOnly Property AllItems As List(Of Object)
+        Get
+            Return MyData
+        End Get
+    End Property
     Public ReadOnly Property PageItems As List(Of Object)
         Get
             Dim startIndex = (CurrentPage - 1) * PageSize
-            Return Me.MyData.Skip(startIndex).Take(PageSize).ToList()
+            Return MyData.Skip(startIndex).Take(PageSize).ToList()
         End Get
     End Property
 
