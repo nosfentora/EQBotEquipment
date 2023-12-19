@@ -1,3 +1,4 @@
+Imports System.Security.Principal
 Imports System.Xml
 
 Module Module1
@@ -18,7 +19,7 @@ Module Module1
 
         Do
             Dim selectedAccount As AccountData = (New Accounts(database)).PromptForAccount()
-            Dim selectedCharacter As CharacterData = PromptForCharacter(selectedAccount)
+            Dim selectedCharacter As CharacterData = (New Characters(database, selectedAccount)).PromptForCharacter()
             If selectedCharacter IsNot Nothing Then
                 Do
                     Dim selectedBot As BotData = PromptForBot(selectedCharacter)
@@ -45,44 +46,6 @@ Module Module1
         Loop While True
 
     End Sub
-
-    Private Function PromptForCharacter(account As AccountData) As CharacterData
-        Console.Clear()
-        Dim characterListData As List(Of CharacterData) = database.LoadCharacterData(account.AccountId)
-
-        If characterListData.Count = 0 Then
-            Console.WriteLine("Not characters found")
-            Return Nothing
-        End If
-
-        Dim selectedCharacterId As Integer
-
-        Utility.WriteWrappedLine($"Characters found for {account.Name}:")
-        For Each character In characterListData
-            Console.WriteLine($"({character.Id}) - {character.Name}")
-        Next
-        Console.WriteLine($"{vbCrLf}(X) - Exit")
-
-        Do
-            Console.Write("Enter the ID of the character you want to work with: ")
-            Dim input As String = Console.ReadLine()
-
-            If Integer.TryParse(input, selectedCharacterId) Then
-                Dim selectedCharacter = characterListData.FirstOrDefault(Function(character) character.Id = selectedCharacterId)
-                If selectedCharacter IsNot Nothing Then
-                    Return selectedCharacter
-                Else
-                    Console.WriteLine("Invalid Character ID. Please try again.")
-                End If
-
-            ElseIf input.Equals("X", StringComparison.CurrentCultureIgnoreCase) Then
-                Environment.Exit(0)
-            Else
-                Console.WriteLine("Invalid input, pleaser enter a number and try again")
-            End If
-
-        Loop
-    End Function
 
     Public Function PromptForBot(selectedCharacter As CharacterData) As BotData
         Console.Clear()
