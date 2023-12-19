@@ -4,15 +4,15 @@ Imports System.Xml
 Imports MySql.Data.MySqlClient
 
 Public Class Database
-    Private Property Host As String
+    Private ReadOnly Host As String
     Private ReadOnly DBName As String
     Private ReadOnly User As String
     Private ReadOnly Password As String
     Private ReadOnly ConnectionString As String
 
-    Private ReadOnly Property Connection As MySqlConnection
-    Private ReadOnly Property XmlData As XMLData
-    Private ReadOnly Property Utility As Utility
+    Private ReadOnly Connection As MySqlConnection
+    Private ReadOnly XmlData As XMLData
+    Private ReadOnly Utility As Utility
 
     Public Sub New(_xmlData As XMLData, _utility As Utility)
         Utility = _utility
@@ -149,10 +149,9 @@ Public Class Database
         Return itemName
     End Function
 
-    Protected Overrides Sub Finalize()
+    Public Sub Cleanup()
         If Connection.State = ConnectionState.Open Then
             Connection.Close()
         End If
-        MyBase.Finalize()
     End Sub
 End Class

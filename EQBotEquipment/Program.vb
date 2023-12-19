@@ -45,6 +45,7 @@ Module Module1
             End If
         Loop While True
 
+        database.Cleanup()
     End Sub
 
     Public Function PromptForConfirmation(account As AccountData, character As CharacterData, bot As BotData, profile As ProfileData)
