@@ -1,6 +1,6 @@
 ﻿Imports System.Xml
 
-Public Class BotProfile
+Public Class ProfileData
     Public ReadOnly Property Profile As XmlNode
     Public ReadOnly Property Inventory As List(Of BotInventoryData)
 

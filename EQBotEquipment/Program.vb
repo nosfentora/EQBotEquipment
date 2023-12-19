@@ -24,7 +24,7 @@ Module Module1
                 Do
                     Dim selectedBot As BotData = (New Bots(database, selectedCharacter)).PromptForBot()
                     If selectedBot IsNot Nothing Then
-                        Dim selectedProfile As BotProfile = PromptForProfile(selectedBot)
+                        Dim selectedProfile As ProfileData = PromptForProfile(selectedBot)
 
                         If PromptForConfirmation(selectedAccount, selectedCharacter, selectedBot, selectedProfile) Then
                             database.UpdateBotInventory(selectedBot.BotId, selectedProfile.Inventory)
@@ -47,9 +47,7 @@ Module Module1
 
     End Sub
 
-
-
-    Public Function PromptForProfile(selectedBot As BotData) As BotProfile
+    Public Function PromptForProfile(selectedBot As BotData) As ProfileData
 
         Dim profiles As List(Of XmlNode) = xmlData.GetProfilesByClass(selectedBot.BotClass)
 
@@ -85,14 +83,14 @@ Module Module1
 
             Console.Write("Select this profile? (Y/N): ")
             If Console.ReadLine().Equals("Y", StringComparison.CurrentCultureIgnoreCase) Then
-                Return New BotProfile(selectedProfile, profileItems)
+                Return New ProfileData(selectedProfile, profileItems)
             End If
         Loop While True
 
         Return Nothing
     End Function
 
-    Public Function PromptForConfirmation(account As AccountData, character As CharacterData, bot As BotData, profile As BotProfile)
+    Public Function PromptForConfirmation(account As AccountData, character As CharacterData, bot As BotData, profile As ProfileData)
         Console.Clear()
         Utility.WriteWrappedLine("Confirm Bot Equipment Change", True)
         Console.WriteLine($"Account: {account.Name} | Character: {character.Name}")
