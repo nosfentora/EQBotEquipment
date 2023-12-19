@@ -5,64 +5,13 @@
         Me.Database = _database
     End Sub
 
-    Public Property AccountData As List(Of AccountData)
-    Private _currentPage As Integer = 1
+    Public Property Pagination As Pagination
 
-    Private Const PageSize = 10
-
-    Public Function NumberOfAccounts() As Integer
-        Return AccountData.Count
-    End Function
-
-    Public ReadOnly Property CurrentPage As Integer
-        Get
-            Return _currentPage
-        End Get
-    End Property
-
-    Public ReadOnly Property PageSizeValue As Integer
-        Get
-            Return PageSize
-        End Get
-    End Property
-
-    Public ReadOnly Property PageItems As List(Of AccountData)
-        Get
-            Dim startIndex = (CurrentPage - 1) * PageSize
-            Return AccountData.Skip(startIndex).Take(PageSize).ToList()
-        End Get
-    End Property
-
-    Public ReadOnly Property HasMore As Boolean
-        Get
-            Return (currentPage * PageSize) < AccountData.Count
-        End Get
-    End Property
-
-    Public ReadOnly Property HasFewer As Boolean
-        Get
-            Return currentPage > 1
-        End Get
-    End Property
-
-    Public Sub MoveToNextPage()
-        If HasMore Then
-            _currentPage += 1
-        End If
-    End Sub
-
-    Public Sub MoveToPreviousPage()
-        If HasFewer Then
-            _currentPage -= 1
-        End If
-    End Sub
     Public Function PromptForAccount() As AccountData
-        AccountData = Database.LoadAccountData
-        'Dim accountsData As New Accounts With {
-        '    .AccountData = Database.LoadAccountData
-        '}
+        Dim AccountData As List(Of AccountData) = Database.LoadAccountData
+        Me.Pagination = New Pagination(AccountData.Cast(Of Object)().ToList())
 
-        If NumberOfAccounts() = 0 Then
+        If Me.Pagination.NumberOfItems = 0 Then
             Console.WriteLine("No accounts found, goodbye!")
             Environment.Exit(0)
         End If
@@ -84,12 +33,12 @@
                 End If
             ElseIf input.Equals("X", StringComparison.CurrentCultureIgnoreCase) Then
                 Environment.Exit(0)
-            ElseIf input.Equals("N", StringComparison.CurrentCultureIgnoreCase) And HasMore Then
-                MoveToNextPage()
+            ElseIf input.Equals("N", StringComparison.CurrentCultureIgnoreCase) And Me.Pagination.HasMore Then
+                Me.Pagination.MoveToNextPage()
                 Console.Clear()
                 WriteAccountMenu()
-            ElseIf input.Equals("P", StringComparison.CurrentCultureIgnoreCase) And HasFewer Then
-                MoveToPreviousPage()
+            ElseIf input.Equals("P", StringComparison.CurrentCultureIgnoreCase) And Me.Pagination.HasFewer Then
+                Me.Pagination.MoveToPreviousPage()
                 Console.Clear()
                 WriteAccountMenu()
             Else
@@ -100,13 +49,13 @@
 
     Private Sub WriteAccountMenu()
         Utility.WriteWrappedLine("Accounts found:")
-        For Each account In PageItems
+        For Each account In Me.Pagination.PageItems
             Console.WriteLine($"({account.AccountId}) - {account.Name})")
         Next
-        If HasMore Then
+        If Me.Pagination.HasMore Then
             Console.WriteLine($"{vbCrLf}(N) - Next")
         End If
-        If HasFewer Then
+        If Me.Pagination.HasFewer Then
             Console.WriteLine($"{vbCrLf}(P) - Previous")
         End If
         Console.WriteLine($"{vbCrLf}(X) - Exit")
