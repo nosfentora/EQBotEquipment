@@ -10,7 +10,7 @@
 
     Private _currentPage As Integer = 1
 
-    Private Const PageSize = 2
+    Private Const PageSize = 10
 
     Public Function NumberOfAccounts() As Integer
         Return CharacterData.Count

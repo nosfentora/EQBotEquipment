@@ -84,6 +84,7 @@ Module Module1
         Loop While True
         Return Nothing
     End Function
+
     Public Function PromptForProfile(selectedBot As BotData) As BotProfile
 
         Dim profiles As List(Of XmlNode) = xmlData.GetProfilesByClass(selectedBot.BotClass)
