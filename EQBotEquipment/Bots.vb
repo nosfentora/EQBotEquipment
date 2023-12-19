@@ -4,16 +4,15 @@
     Private Pagination As Pagination
 
     Public Sub New(_database As Database, _character As CharacterData)
-        Me.Database = _database
-        Me.SelectedCharacter = _character
+        Database = _database
+        SelectedCharacter = _character
     End Sub
 
     Public Function PromptForBot() As BotData
         Console.Clear()
-        Dim BotData As List(Of BotData) = Database.LoadBotData(SelectedCharacter.Id)
-        Me.Pagination = New Pagination(BotData.Cast(Of Object)().ToList())
+        Pagination = New Pagination(Database.LoadBotData(SelectedCharacter.Id).Cast(Of Object)().ToList())
 
-        If Me.Pagination.NumberOfItems = 0 Then
+        If Pagination.NumberOfItems = 0 Then
             Console.WriteLine($"No bots found for {SelectedCharacter.Name}")
             Return Nothing
         End If
@@ -27,7 +26,7 @@
             Dim input As String = Console.ReadLine()
 
             If Integer.TryParse(input, selectedBotId) Then
-                Dim selectedBot = BotData.FirstOrDefault(Function(bot) bot.BotId = selectedBotId)
+                Dim selectedBot = Pagination.PageItems.FirstOrDefault(Function(bot) bot.BotId = selectedBotId)
 
                 If selectedBot IsNot Nothing Then
                     Return selectedBot
@@ -36,12 +35,12 @@
                 End If
             ElseIf input.Equals("X", StringComparison.CurrentCultureIgnoreCase) Then
                 Environment.Exit(0)
-            ElseIf input.Equals("N", StringComparison.CurrentCultureIgnoreCase) And Me.Pagination.HasMore Then
-                Me.Pagination.MoveToNextPage()
+            ElseIf input.Equals("N", StringComparison.CurrentCultureIgnoreCase) And Pagination.HasMore Then
+                Pagination.MoveToNextPage()
                 Console.Clear()
                 WriteMenu()
-            ElseIf input.Equals("P", StringComparison.CurrentCultureIgnoreCase) And Me.Pagination.HasFewer Then
-                Me.Pagination.MoveToPreviousPage()
+            ElseIf input.Equals("P", StringComparison.CurrentCultureIgnoreCase) And Pagination.HasFewer Then
+                Pagination.MoveToPreviousPage()
                 Console.Clear()
                 WriteMenu()
             Else
@@ -53,13 +52,13 @@
 
     Private Sub WriteMenu()
         Utility.WriteWrappedLine($"Bots found for {SelectedCharacter.Name}:")
-        For Each botData As BotData In Me.Pagination.PageItems
+        For Each botData As BotData In Pagination.PageItems
             Console.WriteLine($"({botData.BotId}) - Name: {botData.BotName} [{botData.BotRaceName} {botData.BotClassName} ({botData.BotRace}|{botData.BotClass})]")
         Next
-        If Me.Pagination.HasMore Then
+        If Pagination.HasMore Then
             Console.WriteLine($"{vbCrLf}(N) - Next")
         End If
-        If Me.Pagination.HasFewer Then
+        If Pagination.HasFewer Then
             Console.WriteLine($"{vbCrLf}(P) - Previous")
         End If
         Console.WriteLine($"{vbCrLf}(X) - Exit")
