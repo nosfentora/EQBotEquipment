@@ -1,14 +1,12 @@
 ﻿Public Class Pagination
 
-    Public Property MyData As List(Of Object)
+    Private Const PageSize = 10
+    Private ReadOnly MyData As List(Of Object)
+    Private _currentPage As Integer = 1
 
     Public Sub New(myData As List(Of Object))
         Me.MyData = myData
     End Sub
-
-    Private _currentPage As Integer = 1
-
-    Private Const PageSize = 10
 
     Public Function NumberOfItems() As Integer
         Return Me.MyData.Count
@@ -17,12 +15,6 @@
     Public ReadOnly Property CurrentPage As Integer
         Get
             Return _currentPage
-        End Get
-    End Property
-
-    Public ReadOnly Property PageSizeValue As Integer
-        Get
-            Return PageSize
         End Get
     End Property
 
