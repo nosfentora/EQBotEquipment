@@ -35,18 +35,19 @@ Module Module1
                     Dim selectedCharacter As CharacterData = (New Bots(database, playerCharacter)).PromptForBot()
                     If selectedCharacter IsNot Nothing And TypeOf selectedCharacter Is CharacterData Then
                         Dim selectedProfile As ProfileData = (New Profiles(xmlData, database, selectedCharacter)).PromptForProfile()
-
-                        If PromptForConfirmation(selectedAccount, playerCharacter, selectedCharacter, selectedProfile) Then
-                            database.UpdateInventory(selectedCharacter, selectedProfile.Inventory)
-                        Else
-                            Console.WriteLine($"{vbCrLf}No changes were written to the database.{vbCrLf}")
-                        End If
-                        Console.Write($"Equip another from the same character? (Y/N): ")
-                        Dim userResponse As String = Console.ReadLine().ToUpper()
-                        If userResponse = "N" Then
-                            Exit Do
-                        Else
-                            reSelectPlayerCharacter = True
+                        If selectedProfile IsNot Nothing Then
+                            If PromptForConfirmation(selectedAccount, playerCharacter, selectedCharacter, selectedProfile) Then
+                                database.UpdateInventory(selectedCharacter, selectedProfile.Inventory)
+                            Else
+                                Console.WriteLine($"{vbCrLf}No changes were written to the database.{vbCrLf}")
+                            End If
+                            Console.Write($"Equip another from the same character? (Y/N): ")
+                            Dim userResponse As String = Console.ReadLine().ToUpper()
+                            If userResponse = "N" Then
+                                Exit Do
+                            Else
+                                reSelectPlayerCharacter = True
+                            End If
                         End If
                     Else
                         reSelectPlayerCharacter = True

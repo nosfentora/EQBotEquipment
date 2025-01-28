@@ -23,32 +23,46 @@ Public Class Profiles
         End If
 
         Do
-            WriteMenu()
-
             Dim selectedIndex As Integer
+            Dim mageloProfile As XmlNode = Nothing
+            Dim selectedProfile As XmlNode = Nothing
             Do
+                WriteMenu()
                 Console.Write("Enter the number corresponding to the profile: ")
                 Dim input As String = Console.ReadLine()
 
                 If Integer.TryParse(input, selectedIndex) AndAlso selectedIndex >= 1 AndAlso selectedIndex <= Pagination.PageItemsCount Then
                     ' User entered a valid index
                     Exit Do
+                ElseIf input.Equals("R", StringComparison.CurrentCultureIgnoreCase) Then
+                    Return Nothing
+                ElseIf input.Equals("S", StringComparison.CurrentCultureIgnoreCase) Then
+                    mageloProfile = (New ProfileImport(SelectedCharacter, XMLData)).PromptForProfile()
+                    If mageloProfile Is Nothing Then
+                        Return Nothing
+                    Else
+                        selectedProfile = mageloProfile
+                        Exit Do
+                    End If
                 ElseIf input.Equals("X", StringComparison.CurrentCultureIgnoreCase) Then
                     Environment.Exit(0)
                 ElseIf input.Equals("N", StringComparison.CurrentCultureIgnoreCase) And Pagination.HasMore Then
                     Pagination.MoveToNextPage()
-                    Console.Clear()
                     WriteMenu()
                 ElseIf input.Equals("P", StringComparison.CurrentCultureIgnoreCase) And Pagination.HasFewer Then
                     Pagination.MoveToPreviousPage()
-                    Console.Clear()
                     WriteMenu()
                 Else
                     Console.WriteLine("Invalid input. Please enter a valid number.")
                 End If
             Loop While True
 
-            Dim selectedProfile As XmlNode = Pagination.PageItems(selectedIndex - 1)
+
+            If selectedProfile Is Nothing Then
+                selectedProfile = Pagination.PageItems(selectedIndex - 1)
+            Else
+                selectedProfile = mageloProfile
+            End If
             Dim profileItems As List(Of InventoryData) = XMLData.ExtractItems(Database, SelectedCharacter.Id, selectedProfile)
 
             Console.Write("Select this profile? (Y/N): ")
@@ -72,6 +86,8 @@ Public Class Profiles
         If Pagination.HasFewer Then
             Console.WriteLine($"{vbCrLf}(P) - Previous")
         End If
+        Console.WriteLine($"{vbCrLf}(S) - Scrape a Magelo Profile")
+        Console.WriteLine($"{vbCrLf}(R) - Return to Bot Select")
         Console.WriteLine($"{vbCrLf}(X) - Exit")
     End Sub
 

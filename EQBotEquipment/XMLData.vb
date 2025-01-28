@@ -1,5 +1,7 @@
 ﻿Imports System.IO
+Imports System.Runtime
 Imports System.Xml
+Imports Org.BouncyCastle.Crypto
 
 Public Class XMLData
 
@@ -171,6 +173,27 @@ Public Class XMLData
         Console.WriteLine($"Imported {importCount} new bot equipment profiles to {FILENAME}, skipped {skipCount} duplicates.{vbCrLf}")
 
     End Sub
+
+    Public Function CreateProfileNode(character As CharacterData, ids As String) As XmlNode
+
+        Dim dataNode As XmlNode = GetElement("Bots/Imported")
+
+        Dim profileNode As XmlNode = XmlData.CreateElement("Profile")
+        profileNode.Attributes.Append(CreateXmlAttribute(XmlData, "Class", character.ClassId - 1))
+        profileNode.Attributes.Append(CreateXmlAttribute(XmlData, "Name", $"{character.Name} - Magelo ID {character.MageloId}"))
+
+        Dim itemsNode As XmlNode = XmlData.CreateElement("Items")
+        itemsNode.Attributes.Append(CreateXmlAttribute(XmlData, "IDS", ids))
+
+        profileNode.AppendChild(itemsNode)
+
+        If (IsProfileUnique(GetElement("Bots/Imported"), character.ClassId - 1, ids) And IsProfileUnique(GetElement("Bots/PreDefined"), character.ClassId - 1, ids)) Then
+            dataNode.AppendChild(profileNode)
+            XmlData.Save(XmlFilePath)
+        End If
+
+        Return profileNode
+    End Function
 
     Private Shared Function IsProfileUnique(dataNode As XmlElement, classId As Integer, ids As String) As Boolean
         For Each existingProfile As XmlNode In dataNode.ChildNodes

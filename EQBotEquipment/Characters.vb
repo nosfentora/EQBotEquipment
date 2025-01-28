@@ -62,7 +62,7 @@
         If Pagination.HasFewer Then
             Console.WriteLine($"{vbCrLf}(P) - Previous")
         End If
-        Console.WriteLine($"{vbCrLf}(X) - Exit")
         Console.WriteLine($"{vbCrLf}(R) - Return to Account Select")
+        Console.WriteLine($"{vbCrLf}(X) - Exit")
     End Sub
 End Class

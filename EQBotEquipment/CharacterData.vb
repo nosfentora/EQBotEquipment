@@ -26,4 +26,5 @@
             Return If(IsBot, "Bot", "Character")
         End Get
     End Property
+    Public Property MageloId As String
 End Class
