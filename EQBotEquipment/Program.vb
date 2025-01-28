@@ -14,9 +14,22 @@ Module Module1
 
         database = New Database(xmlData)
 
+        Dim reSelectCharacter As Boolean = False
+        Dim selectedAccount As AccountData = Nothing
+        Dim selectedCharacter As CharacterData = Nothing
+
         Do
-            Dim selectedAccount As AccountData = (New Accounts(database)).PromptForAccount()
-            Dim selectedCharacter As CharacterData = (New Characters(database, selectedAccount)).PromptForCharacter()
+            If reSelectCharacter Then
+                If selectedAccount Is Nothing Then
+                    selectedAccount = (New Accounts(database)).PromptForAccount()
+                End If
+                selectedCharacter = (New Characters(database, selectedAccount)).PromptForCharacter()
+            Else
+                selectedAccount = (New Accounts(database)).PromptForAccount()
+                selectedCharacter = (New Characters(database, selectedAccount)).PromptForCharacter()
+            End If
+            reSelectCharacter = False
+
             If selectedCharacter IsNot Nothing Then
                 Do
                     Dim selectedBot As BotData = (New Bots(database, selectedCharacter)).PromptForBot()
@@ -34,10 +47,12 @@ Module Module1
                             Exit Do
                         End If
                     Else
+                        reSelectCharacter = True
                         Exit Do
                     End If
                 Loop While True
             End If
+            Console.Clear()
         Loop While True
 
         database.Cleanup()

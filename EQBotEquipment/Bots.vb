@@ -33,6 +33,8 @@
                 Else
                     Console.WriteLine("Invalid Bot ID. Please enter a valid Bot ID.")
                 End If
+            ElseIf input.Equals("R", StringComparison.CurrentCultureIgnoreCase) Then
+                Return Nothing
             ElseIf input.Equals("X", StringComparison.CurrentCultureIgnoreCase) Then
                 Environment.Exit(0)
             ElseIf input.Equals("N", StringComparison.CurrentCultureIgnoreCase) And Pagination.HasMore Then
@@ -62,5 +64,6 @@
             Console.WriteLine($"{vbCrLf}(P) - Previous")
         End If
         Console.WriteLine($"{vbCrLf}(X) - Exit")
+        Console.WriteLine($"{vbCrLf}(R) - Return to Character Select")
     End Sub
 End Class

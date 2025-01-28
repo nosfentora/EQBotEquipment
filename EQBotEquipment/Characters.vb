@@ -32,7 +32,8 @@
                 Else
                     Console.WriteLine("Invalid Character ID. Please try again.")
                 End If
-
+            ElseIf input.Equals("R", StringComparison.CurrentCultureIgnoreCase) Then
+                Return Nothing
             ElseIf input.Equals("X", StringComparison.CurrentCultureIgnoreCase) Then
                 Environment.Exit(0)
             ElseIf input.Equals("N", StringComparison.CurrentCultureIgnoreCase) And Pagination.HasMore Then
@@ -50,6 +51,7 @@
     End Function
 
     Private Sub WriteMenu()
+        Console.Clear()
         Utility.WriteWrappedLine($"Characters found for {Account.Name}:")
         For Each character In Pagination.PageItems
             Console.WriteLine($"({character.Id}) - {character.Name} ({character.RaceName} | {character.ClassName})")
@@ -61,5 +63,6 @@
             Console.WriteLine($"{vbCrLf}(P) - Previous")
         End If
         Console.WriteLine($"{vbCrLf}(X) - Exit")
+        Console.WriteLine($"{vbCrLf}(R) - Return to Account Select")
     End Sub
 End Class

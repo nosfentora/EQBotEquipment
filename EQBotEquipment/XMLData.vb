@@ -171,7 +171,7 @@ Public Class XMLData
 
     End Sub
 
-    Private Shared Function IsProfileUnique(dataNode As XmlNode, classId As Integer, ids As String) As Boolean
+    Private Shared Function IsProfileUnique(dataNode As XmlElement, classId As Integer, ids As String) As Boolean
         For Each existingProfile As XmlNode In dataNode.ChildNodes
             Dim existingClass As Integer = Integer.Parse(existingProfile.Attributes("Class").Value)
             Dim existingIds As String = existingProfile.SelectSingleNode("Items").Attributes("IDS").Value
