@@ -1,6 +1,8 @@
 EQBotEquipment
 
-A little utility to equip bots quickly using the included equipment profiles in Data.xml, or .Bot files from GeorgeS' EQItems editor.
+A little utility to equip bots, and characters, quickly using the included equipment profiles in Data.xml, or .Bot files from GeorgeS' EQItems editor.
+
+Also included is functionality to import Magelo equipment profiles and equip characters and bots directly.
 
 Edit the included Data.xml file and update the <Database> record with your db credentials.  Save and run the executable.
 
