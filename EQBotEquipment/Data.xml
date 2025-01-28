@@ -1,5 +1,5 @@
 <data>
-	<Database host="127.0.0.1" db_name="peq" user="root" password="eqemu" />
+	<Database host="127.0.0.1" db_name="peq" user="eqemu" password="eqemu" />
 	<Bots>
 		<PreDefined>
 			<Profile Class="0" Name="Warrior_Uber">
