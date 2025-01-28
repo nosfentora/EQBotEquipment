@@ -52,7 +52,7 @@
     Private Sub WriteMenu()
         Utility.WriteWrappedLine($"Characters found for {Account.Name}:")
         For Each character In Pagination.PageItems
-            Console.WriteLine($"({character.Id}) - {character.Name}")
+            Console.WriteLine($"({character.Id}) - {character.Name} ({character.RaceName} | {character.ClassName})")
         Next
         If Pagination.HasMore Then
             Console.WriteLine($"{vbCrLf}(N) - Next")

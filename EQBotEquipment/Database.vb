@@ -56,16 +56,18 @@ Public Class Database
     Public Function LoadCharacterData(account_id As Integer) As List(Of CharacterData)
         Dim characterDataList As New List(Of CharacterData)
 
-        Dim selectQuery As String = $"SELECT id, account_id, name FROM character_data WHERE account_id = {account_id} ORDER BY name ASC"
+        Dim selectQuery As String = $"SELECT id, account_id, name, race, class FROM character_data WHERE account_id = {account_id} ORDER BY name ASC"
 
         Using cmd As New MySqlCommand(selectQuery, Connection)
             Using reader As MySqlDataReader = cmd.ExecuteReader()
                 While reader.Read()
-                    Dim character As New CharacterData()
+                    Dim character As New CharacterData(XmlData)
                     With character
                         .Id = reader.GetInt32("id")
                         .AccountId = reader.GetInt32("account_id")
                         .Name = reader.GetString("name")
+                        .RaceId = reader.GetInt32("race")
+                        .ClassId = reader.GetInt32("class")
                     End With
 
                     characterDataList.Add(character)
