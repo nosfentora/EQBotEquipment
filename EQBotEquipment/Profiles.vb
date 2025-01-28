@@ -62,7 +62,7 @@ Public Class Profiles
 
     Private Sub WriteMenu()
         Console.Clear()
-        Utility.WriteWrappedLine($"Select an equipment profile for the {SelectedCharacter.RaceName} / {SelectedCharacter.ClassName} Bot ''{SelectedCharacter.Name}'':")
+        Utility.WriteWrappedLine($"Select an equipment profile for the {SelectedCharacter.RaceName} / {SelectedCharacter.ClassName} {SelectedCharacter.Type} ''{SelectedCharacter.Name}'':")
         For i = 0 To Pagination.PageItemsCount - 1
             Console.WriteLine($"{i + 1}. {Pagination.PageItems(i).Attributes("Name").Value}")
         Next

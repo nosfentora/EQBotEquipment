@@ -60,11 +60,11 @@ Module Module1
         database.Cleanup()
     End Sub
 
-    Public Function PromptForConfirmation(account As AccountData, character As CharacterData, bot As CharacterData, profile As ProfileData)
+    Public Function PromptForConfirmation(account As AccountData, playerCharacter As CharacterData, selectedCharacter As CharacterData, profile As ProfileData)
         Console.Clear()
-        Utility.WriteWrappedLine("Confirm Bot Equipment Change", True)
-        Console.WriteLine($"Account: {account.Name} | Character: {character.Name}")
-        Console.WriteLine($"Bot: {bot.Name} ({bot.RaceName } {bot.ClassName})")
+        Utility.WriteWrappedLine($"Confirm {selectedCharacter.Type} Equipment Change", True)
+        Console.WriteLine($"Account: {account.Name} | Owning Character: {playerCharacter.Name}")
+        Console.WriteLine($"{selectedCharacter.Type}: {selectedCharacter.Name} ({selectedCharacter.RaceName } {selectedCharacter.ClassName})")
         Console.WriteLine($"Using Profile: {profile.Profile.Attributes("Name").Value}{vbCrLf}")
         Utility.WriteWrappedLine("Equipment change to be made", True)
 
