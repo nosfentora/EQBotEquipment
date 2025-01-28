@@ -1,3 +1,4 @@
+<!-- Thanks to TonyO for the defiant profiles -->
 <data>
 	<Database host="127.0.0.1" db_name="peq" user="eqemu" password="eqemu" />
 	<Bots>
@@ -152,7 +153,6 @@
 			<Profile Class="15" Name="Berserker_Mid_Level">
 				<Items IDS="0,10082,29050,24740,40104,69298,68246,30115,40065,7941,11978,69011,3310,69297,0,45916,45916,25331,40196,68247,1365,0,0" />
 			</Profile>
-			<!-- Thanks to TonyO for the following profiles -->
 			<Profile Class="7" Name="Defiant_Bard_Level_01">
 				<Items IDS="059943,108301,050008,108302,108300,108303,003937,050009,108305,050005,050005,108306,050006,005656,050517,108308,108308,050011,050010,050007,108309,000000,021575" />
 			</Profile>
