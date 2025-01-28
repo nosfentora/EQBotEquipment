@@ -20,5 +20,10 @@
             Return XmlData.GetByValue("Races", "Race", RaceId)
         End Get
     End Property
-
+    Public Property IsBot As Boolean
+    Public ReadOnly Property Type As String
+        Get
+            Return If(IsBot, "Bot", "Character")
+        End Get
+    End Property
 End Class

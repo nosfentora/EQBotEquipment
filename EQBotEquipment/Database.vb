@@ -68,6 +68,7 @@ Public Class Database
                         .Name = reader.GetString("name")
                         .RaceId = reader.GetInt32("race")
                         .ClassId = reader.GetInt32("class")
+                        .IsBot = False
                     End With
 
                     characterDataList.Add(character)
@@ -78,20 +79,21 @@ Public Class Database
         Return characterDataList
     End Function
 
-    Public Function LoadBotData(selectedCharacterId As Integer) As List(Of BotData)
-        Dim botDataList As New List(Of BotData)
+    Public Function LoadBotData(selectedCharacterId As Integer) As List(Of CharacterData)
+        Dim botDataList As New List(Of CharacterData)
 
         Dim query As String = $"SELECT bot_id, name, race, class FROM bot_data WHERE owner_id = {selectedCharacterId} ORDER BY name ASC"
 
         Using command As New MySqlCommand(query, Connection)
             Using reader As MySqlDataReader = command.ExecuteReader()
                 While reader.Read()
-                    Dim bot As New BotData(XmlData)
+                    Dim bot As New CharacterData(XmlData)
                     With bot
-                        .BotId = reader.GetInt32("bot_id")
-                        .BotName = reader.GetString("name")
-                        .BotRace = reader.GetString("race")
-                        .BotClass = reader.GetString("class")
+                        .Id = reader.GetInt32("bot_id")
+                        .Name = reader.GetString("name")
+                        .RaceId = reader.GetString("race")
+                        .ClassId = reader.GetString("class")
+                        .IsBot = True
                     End With
                     botDataList.Add(bot)
                 End While
@@ -101,18 +103,30 @@ Public Class Database
         Return botDataList
     End Function
 
-    Public Sub UpdateBotInventory(botId As Integer, validEntries As List(Of BotInventoryData))
+    Public Sub UpdateInventory(character As CharacterData, validEntries As List(Of InventoryData))
 
         If validEntries IsNot Nothing And validEntries.Count > 0 Then
             Using transaction As MySqlTransaction = Connection.BeginTransaction()
                 Dim success As Boolean = False
                 Try
                     Using cmd As MySqlCommand = Connection.CreateCommand()
-                        cmd.CommandText = $"DELETE FROM bot_inventories WHERE bot_id = {botId}"
+                        If character.IsBot Then
+                            cmd.CommandText = $"DELETE FROM bot_inventories WHERE bot_id = {character.Id}"
+                        Else
+                            Dim list As New List(Of String)
+                            For Each entry In validEntries
+                                list.Add(entry.SlotId)
+                            Next
+                            cmd.CommandText = $"DELETE from inventory WHERE charid = {character.Id} AND slotid in ({String.Join(",", list)}) "
+                        End If
                         cmd.ExecuteNonQuery()
 
                         For Each entry In validEntries
-                            cmd.CommandText = $"INSERT INTO bot_inventories (bot_id, slot_id, item_id) VALUES ({entry.BotId}, {entry.SlotId}, {entry.ItemId})"
+                            If character.IsBot Then
+                                cmd.CommandText = $"INSERT INTO bot_inventories (bot_id, slot_id, item_id) VALUES ({entry.CharacterId}, {entry.SlotId}, {entry.ItemId})"
+                            Else
+                                cmd.CommandText = $"INSERT INTO inventory (charid, slotid, itemid, charges, color, guid) VALUES ({entry.CharacterId}, {entry.SlotId}, {entry.ItemId}, {entry.Charges}, {entry.Color}, {entry.GUID})"
+                            End If
                             cmd.ExecuteNonQuery()
                         Next
 
@@ -125,7 +139,7 @@ Public Class Database
                     Console.WriteLine($"Error: {ex.Message}")
                 End Try
                 If success Then
-                    Console.WriteLine($"{vbCrLf}Updated bot inventory with {validEntries.Count} items.{vbCrLf}")
+                    Console.WriteLine($"{vbCrLf}Updated {character.Type} inventory with {validEntries.Count} items.{vbCrLf}")
                 End If
             End Using
         Else
@@ -133,20 +147,26 @@ Public Class Database
         End If
     End Sub
 
-    Public Function GetItemData(itemId As Integer)
-        Dim itemName As String = Nothing
+    Public Function GetItemData(itemId As Integer) As ItemData
+        Dim itemData As New ItemData
 
-        Dim selectQuery As String = $"SELECT id, name FROM items WHERE id = {itemId}"
+        Dim selectQuery As String = $"SELECT id, name, maxcharges, color, icon FROM items WHERE id = {itemId}"
 
         Using cmd As New MySqlCommand(selectQuery, Connection)
             Using reader As MySqlDataReader = cmd.ExecuteReader()
                 If reader.Read() Then
-                    itemName = reader.GetString("name")
+                    With itemData
+                        .Id = reader.GetInt32("id")
+                        .Name = reader.GetString("name")
+                        .Charges = reader.GetInt32("maxcharges")
+                        .Color = reader.GetString("color")
+                        .GUID = reader.GetInt32("icon")
+                    End With
                 End If
             End Using
         End Using
 
-        Return itemName
+        Return itemData
     End Function
 
     Public Sub Cleanup()

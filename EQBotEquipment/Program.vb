@@ -14,40 +14,42 @@ Module Module1
 
         database = New Database(xmlData)
 
-        Dim reSelectCharacter As Boolean = False
+        Dim reSelectPlayerCharacter As Boolean = False
         Dim selectedAccount As AccountData = Nothing
-        Dim selectedCharacter As CharacterData = Nothing
+        Dim playerCharacter As CharacterData
 
         Do
-            If reSelectCharacter Then
+            If reSelectPlayerCharacter Then
                 If selectedAccount Is Nothing Then
                     selectedAccount = (New Accounts(database)).PromptForAccount()
                 End If
-                selectedCharacter = (New Characters(database, selectedAccount)).PromptForCharacter()
+                playerCharacter = (New Characters(database, selectedAccount)).PromptForCharacter()
             Else
                 selectedAccount = (New Accounts(database)).PromptForAccount()
-                selectedCharacter = (New Characters(database, selectedAccount)).PromptForCharacter()
+                playerCharacter = (New Characters(database, selectedAccount)).PromptForCharacter()
             End If
-            reSelectCharacter = False
+            reSelectPlayerCharacter = False
 
-            If selectedCharacter IsNot Nothing Then
+            If playerCharacter IsNot Nothing Then
                 Do
-                    Dim selectedBot As BotData = (New Bots(database, selectedCharacter)).PromptForBot()
-                    If selectedBot IsNot Nothing Then
-                        Dim selectedProfile As ProfileData = (New Profiles(xmlData, database, selectedBot)).PromptForProfile()
+                    Dim selectedCharacter As CharacterData = (New Bots(database, playerCharacter)).PromptForBot()
+                    If selectedCharacter IsNot Nothing And TypeOf selectedCharacter Is CharacterData Then
+                        Dim selectedProfile As ProfileData = (New Profiles(xmlData, database, selectedCharacter)).PromptForProfile()
 
-                        If PromptForConfirmation(selectedAccount, selectedCharacter, selectedBot, selectedProfile) Then
-                            database.UpdateBotInventory(selectedBot.BotId, selectedProfile.Inventory)
+                        If PromptForConfirmation(selectedAccount, playerCharacter, selectedCharacter, selectedProfile) Then
+                            database.UpdateInventory(selectedCharacter, selectedProfile.Inventory)
                         Else
                             Console.WriteLine($"{vbCrLf}No changes were written to the database.{vbCrLf}")
                         End If
-                        Console.Write("Equip another bot from the same character? (Y/N): ")
+                        Console.Write($"Equip another {selectedCharacter.Type} from the same character? (Y/N): ")
                         Dim userResponse As String = Console.ReadLine().ToUpper()
                         If userResponse = "N" Then
                             Exit Do
+                        Else
+                            reSelectPlayerCharacter = True
                         End If
                     Else
-                        reSelectCharacter = True
+                        reSelectPlayerCharacter = True
                         Exit Do
                     End If
                 Loop While True
@@ -58,16 +60,16 @@ Module Module1
         database.Cleanup()
     End Sub
 
-    Public Function PromptForConfirmation(account As AccountData, character As CharacterData, bot As BotData, profile As ProfileData)
+    Public Function PromptForConfirmation(account As AccountData, character As CharacterData, bot As CharacterData, profile As ProfileData)
         Console.Clear()
         Utility.WriteWrappedLine("Confirm Bot Equipment Change", True)
         Console.WriteLine($"Account: {account.Name} | Character: {character.Name}")
-        Console.WriteLine($"Bot: {bot.BotName} ({bot.BotRaceName } {bot.BotClassName})")
+        Console.WriteLine($"Bot: {bot.Name} ({bot.RaceName } {bot.ClassName})")
         Console.WriteLine($"Using Profile: {profile.Profile.Attributes("Name").Value}{vbCrLf}")
         Utility.WriteWrappedLine("Equipment change to be made", True)
 
-        For Each item As BotInventoryData In profile.Inventory
-            Console.WriteLine($"{item.SlotName} ({item.SlotId}) -> ({item.ItemId}) {item.ItemName}")
+        For Each item As InventoryData In profile.Inventory
+            Console.WriteLine($"{item.SlotName} ({item.SlotId}) -> ({item.ItemId}) {item.Name}")
         Next
 
         Console.Write($"{vbCrLf}Commit changes to the database? (Y/N): ")

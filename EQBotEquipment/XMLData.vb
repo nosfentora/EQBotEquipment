@@ -97,18 +97,19 @@ Public Class XMLData
         Return sanitizedFileName.Contains(sanitizedClassName) OrElse sanitizedAltNames.Any(Function(alt) sanitizedFileName.Contains(alt))
     End Function
 
-    Public Function ExtractItems(database As Database, botId As Integer, selectedProfile As XmlNode) As List(Of BotInventoryData)
+    Public Function ExtractItems(database As Database, characterId As Integer, selectedProfile As XmlNode) As List(Of InventoryData)
 
-        If selectedProfile IsNot Nothing And botId > 0 Then
+        If selectedProfile IsNot Nothing And characterId > 0 Then
             Dim idsAttribute As String = selectedProfile.SelectSingleNode("Items").Attributes("IDS").Value
             Dim idsArray As String() = idsAttribute.Split(","c)
-            Dim validEntries As New List(Of BotInventoryData)
+            Dim validEntries As New List(Of InventoryData)
 
             For i = 0 To idsArray.Length - 1
                 Dim itemId As Integer = Convert.ToInt32(idsArray(i))
 
                 If itemId > 0 Then
-                    validEntries.Add(New BotInventoryData With {.BotId = botId, .SlotId = i, .ItemId = itemId, .SlotName = GetByValue("Slots", "Slot", i + 1), .ItemName = database.GetItemData(itemId)})
+                    Dim itemData As ItemData = database.GetItemData(itemId)
+                    validEntries.Add(New InventoryData With {.CharacterId = characterId, .SlotId = i, .ItemId = itemId, .SlotName = GetByValue("Slots", "Slot", i + 1), .Name = itemData.Name, .Charges = itemData.Charges, .Color = itemData.Color, .GUID = itemData.GUID})
                 End If
             Next
 

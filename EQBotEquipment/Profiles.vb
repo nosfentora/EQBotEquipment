@@ -4,18 +4,18 @@ Public Class Profiles
 
     Private ReadOnly XMLData As XMLData
     Private ReadOnly Database As Database
-    Private ReadOnly SelectedBot As BotData
+    Private ReadOnly SelectedCharacter As CharacterData
 
     Private Pagination As Pagination
 
-    Public Sub New(_xmlData As XMLData, _database As Database, _selectedBot As BotData)
+    Public Sub New(_xmlData As XMLData, _database As Database, _selectedCharacter As CharacterData)
         XMLData = _xmlData
         Database = _database
-        SelectedBot = _selectedBot
+        SelectedCharacter = _selectedCharacter
     End Sub
 
     Public Function PromptForProfile() As ProfileData
-        Pagination = New Pagination(XMLData.GetProfilesByClass(SelectedBot.BotClass).Cast(Of Object)().ToList())
+        Pagination = New Pagination(XMLData.GetProfilesByClass(SelectedCharacter.ClassId).Cast(Of Object)().ToList())
 
         If Pagination.NumberOfItems = 0 Then
             Console.WriteLine("No inventory profiles found...")
@@ -49,7 +49,7 @@ Public Class Profiles
             Loop While True
 
             Dim selectedProfile As XmlNode = Pagination.PageItems(selectedIndex - 1)
-            Dim profileItems As List(Of BotInventoryData) = XMLData.ExtractItems(Database, SelectedBot.BotId, selectedProfile)
+            Dim profileItems As List(Of InventoryData) = XMLData.ExtractItems(Database, SelectedCharacter.Id, selectedProfile)
 
             Console.Write("Select this profile? (Y/N): ")
             If Console.ReadLine().Equals("Y", StringComparison.CurrentCultureIgnoreCase) Then
@@ -62,7 +62,7 @@ Public Class Profiles
 
     Private Sub WriteMenu()
         Console.Clear()
-        Utility.WriteWrappedLine($"Select an equipment profile for the {selectedBot.BotRaceName} / {selectedBot.BotClassName} Bot ''{selectedBot.BotName}'':")
+        Utility.WriteWrappedLine($"Select an equipment profile for the {SelectedCharacter.RaceName} / {SelectedCharacter.ClassName} Bot ''{SelectedCharacter.Name}'':")
         For i = 0 To Pagination.PageItemsCount - 1
             Console.WriteLine($"{i + 1}. {Pagination.PageItems(i).Attributes("Name").Value}")
         Next
