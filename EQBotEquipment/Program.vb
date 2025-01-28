@@ -41,7 +41,7 @@ Module Module1
                         Else
                             Console.WriteLine($"{vbCrLf}No changes were written to the database.{vbCrLf}")
                         End If
-                        Console.Write($"Equip another {selectedCharacter.Type} from the same character? (Y/N): ")
+                        Console.Write($"Equip another from the same character? (Y/N): ")
                         Dim userResponse As String = Console.ReadLine().ToUpper()
                         If userResponse = "N" Then
                             Exit Do
